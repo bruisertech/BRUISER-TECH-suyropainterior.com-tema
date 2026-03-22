@@ -20,6 +20,10 @@ require_once get_template_directory() . '/inc/plugin-update-checker/plugin-updat
 
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
+// IMPORTANTE: Para temas, debemos usar buildUpdateChecker o buildThemeUpdateChecker,
+// y debemos pasar el archivo functions.php de forma correcta. Usamos __FILE__
+// ya que este código se ejecuta dentro de functions.php del tema. Sin embargo,
+// PucFactory a veces necesita más contexto para identificar que es un *tema*.
 $myUpdateChecker = PucFactory::buildUpdateChecker(
     'https://github.com/bruisertech/BRUISER-TECH-suyropainterior.com-tema/',
     __FILE__,
