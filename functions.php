@@ -29,11 +29,21 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 // Establecer la rama a 'main'
 $myUpdateChecker->setBranch('main');
 
+// ==========================================================================
+// ESPACIO PARA TOKEN GITHUB (CONFIGURACIÓN INICIAL)
+// Inserta aquí tu GitHub Personal Access Token (Classic)
+// $myUpdateChecker->setAuthentication('TU_TOKEN_AQUI');
+// ==========================================================================
+
 // Autenticación para el repositorio privado
 // --------------------------------------------------------------------------
 // INSERTE SU GITHUB PERSONAL ACCESS TOKEN (CLASSIC) A CONTINUACIÓN
 // --------------------------------------------------------------------------
-$myUpdateChecker->setAuthentication('AQUI_TU_TOKEN');
+$myUpdateChecker->setAuthentication(defined('SUY_GITHUB_TOKEN') ? SUY_GITHUB_TOKEN : 'ESPACIO_PARA_TOKEN_AQUI');
+
+// Forzar la creación de un botón visible de "Check for updates"
+// (Aunque es automático, habilitarlo explícitamente ayuda)
+$myUpdateChecker->getVcsApi()->enableReleaseAssets();
 
 
 /* ==========================================================================
@@ -141,3 +151,30 @@ if ( ! function_exists( 'suyropainterior_post_thumbnail' ) ) :
         endif; // End is_singular().
     }
 endif;
+
+/* ==========================================================================
+   Botón Manual Force Sync (Actualizar Tema Remotamente)
+   ========================================================================== */
+add_action('admin_bar_menu', 'suyropainterior_force_sync_button', 999);
+function suyropainterior_force_sync_button($wp_admin_bar) {
+    if (!current_user_can('update_themes')) {
+        return;
+    }
+
+    $sync_url = wp_nonce_url(
+        admin_url('update-core.php?action=do-theme-upgrade'),
+        'upgrade-core'
+    );
+
+    // Enlace para Forzar Sincronización de GitHub (Redirige a la página de actualizaciones)
+    $args = array(
+        'id'    => 'suyropainterior_force_sync',
+        'title' => '🔄 Forzar Sync GitHub (SUY ROPA)',
+        'href'  => admin_url('update-core.php'),
+        'meta'  => array(
+            'class' => 'suyropainterior-sync-btn',
+            'title' => 'Buscar actualizaciones del tema en GitHub'
+        )
+    );
+    $wp_admin_bar->add_node($args);
+}
