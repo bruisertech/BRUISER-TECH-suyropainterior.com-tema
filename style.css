@@ -1,0 +1,252 @@
+/*
+Theme Name: SUY ROPA INTERIOR
+Theme URI: https://suyropainterior.com/
+Description: Tema Premium y minimalista para la tienda de lencería de lujo SUY ROPA INTERIOR. Con tipografía Playfair Display, toques dorados y una experiencia UX de alto nivel.
+Author: BRUISER TECH
+Author URI: https://github.com/bruisertech
+Version: 1.0.0
+Requires at least: 6.9.4
+Tested up to: 6.9.4
+Requires PHP: 8.3
+WC requires at least: 10.6.1
+WC tested up to: 10.6.1
+Text Domain: suyropainterior
+*/
+
+/* --------------------------------------------------------------------------
+   Variables Generales
+-------------------------------------------------------------------------- */
+:root {
+    --primary-color: #000000;
+    --secondary-color: #ffffff;
+    --accent-gold: #d4af37; /* Dorado Lujo */
+    --text-color: #333333;
+    --bg-light: #fafafa;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    --sidebar-width: 300px;
+    --tabbar-height: 60px;
+}
+
+/* --------------------------------------------------------------------------
+   Reset Básico y Tipografía
+-------------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-gold);
+}
+
+/* --------------------------------------------------------------------------
+   Estructura Principal
+-------------------------------------------------------------------------- */
+.site-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.site-main {
+    flex: 1;
+    padding: 2rem;
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Layout Desktop (Sidebar)
+-------------------------------------------------------------------------- */
+.site-header-desktop {
+    width: var(--sidebar-width);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: var(--secondary-color);
+    border-right: 1px solid #eaeaea;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+.site-branding h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.site-branding h1 a {
+    color: var(--primary-color);
+}
+
+.main-navigation ul {
+    list-style: none;
+    padding: 0;
+}
+
+.main-navigation li {
+    margin-bottom: 1rem;
+}
+
+.main-navigation a {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-color);
+}
+
+.main-navigation a:hover {
+    color: var(--accent-gold);
+}
+
+/* Ajuste del contenido principal cuando hay sidebar */
+@media screen and (min-width: 992px) {
+    .site-main {
+        margin-left: var(--sidebar-width);
+    }
+
+    .site-header-mobile,
+    .site-footer-mobile-tabbar {
+        display: none !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Layout Mobile
+-------------------------------------------------------------------------- */
+@media screen and (max-width: 991px) {
+    .site-wrapper {
+        flex-direction: column;
+    }
+
+    .site-header-desktop {
+        display: none;
+    }
+
+    .site-main {
+        padding-top: 80px; /* Para el header sticky */
+        padding-bottom: 80px; /* Para el footer tab bar */
+    }
+
+    /* Header Superior Sticky */
+    .site-header-mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--secondary-color);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .site-header-mobile .site-branding h1 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    /* Footer Sticky (Tab Bar) */
+    .site-footer-mobile-tabbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: var(--tabbar-height);
+        background-color: var(--secondary-color);
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .tabbar-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        font-size: 0.75rem;
+    }
+
+    .tabbar-item:hover,
+    .tabbar-item.active {
+        color: var(--accent-gold);
+    }
+
+    .tabbar-icon {
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   WooCommerce Customizations (Base)
+-------------------------------------------------------------------------- */
+/* Botones */
+.woocommerce button.button,
+.woocommerce button.button.alt,
+.woocommerce a.button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: normal;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+}
+
+.woocommerce button.button:hover,
+.woocommerce button.button.alt:hover,
+.woocommerce a.button:hover {
+    background-color: var(--accent-gold);
+    color: var(--secondary-color);
+}
+
+/* Precios */
+.woocommerce div.product p.price,
+.woocommerce div.product span.price,
+.woocommerce ul.products li.product .price {
+    color: var(--accent-gold);
+    font-family: var(--font-heading);
+}
+
+/* Títulos de Productos */
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
