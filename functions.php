@@ -41,9 +41,9 @@ $myUpdateChecker->setBranch('main');
 // --------------------------------------------------------------------------
 $myUpdateChecker->setAuthentication(defined('SUY_GITHUB_TOKEN') ? SUY_GITHUB_TOKEN : 'ESPACIO_PARA_TOKEN_AQUI');
 
-// Forzar la creación de un botón visible de "Check for updates"
-// (Aunque es automático, habilitarlo explícitamente ayuda)
-$myUpdateChecker->getVcsApi()->enableReleaseAssets();
+// IMPORTANTE: NO usamos enableReleaseAssets() porque queremos que las
+// actualizaciones se lean directamente del código de la rama 'main',
+// sin necesidad de crear "Releases" (.zip) formales en GitHub.
 
 
 /* ==========================================================================
